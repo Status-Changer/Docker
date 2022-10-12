@@ -16,7 +16,7 @@ func main() {
 	if os.Args[0] == "/proc/self/exe" {
 		fmt.Printf("current pid %d", syscall.Getpid())
 		fmt.Println()
-		cmd := exec.Command("sh", "-c", `stress --vm-bytes 50m --vm-keep -m 1`)
+		cmd := exec.Command("sh", "-c", `stress --vm-bytes 512m --vm-keep -m 1`)
 		cmd.SysProcAttr = &syscall.SysProcAttr{}
 
 		cmd.Stdin = os.Stdin
