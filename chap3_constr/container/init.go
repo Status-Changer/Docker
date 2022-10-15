@@ -6,6 +6,7 @@ import (
 	"syscall"
 )
 
+// RunContainerInitProcess 在容器内部执行，使用mount去挂载proc文件系统
 func RunContainerInitProcess(command string, args []string) error {
 	log.Infof("command %s", command)
 
