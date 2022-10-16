@@ -20,6 +20,7 @@ func NewParentProcess(tty bool) (*exec.Cmd, *os.File) {
 	readPipe, writePipe, err := NewPipe()
 	if err != nil {
 		log.Errorf("New pipe error %v", err)
+		return nil, nil
 	}
 
 	cmd := exec.Command("/proc/self/exe", "init")
