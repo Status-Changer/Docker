@@ -30,7 +30,7 @@ func (s *MemorySubsystem) Set(cgroupPath string, res *ResourceConfig) error {
 // Remove 删除cgroupPath对应的cgroup
 func (s *MemorySubsystem) Remove(cgroupPath string) error {
 	if subsystemCgroupPath, err := GetCgroupPath(s.Name(), cgroupPath, false); err == nil {
-		return os.Remove(subsystemCgroupPath)
+		return os.RemoveAll(subsystemCgroupPath)
 	} else {
 		return err
 	}
