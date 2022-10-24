@@ -1,8 +1,8 @@
 package main
 
 import (
-	"Docker/chap3_constr/cgroups/subsystems"
-	"Docker/chap3_constr/container"
+	"Docker/src/cgroups/subsystems"
+	"Docker/src/container"
 	"fmt"
 	log "github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
