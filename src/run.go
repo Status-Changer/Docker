@@ -1,9 +1,9 @@
 package main
 
 import (
-	"Docker/chap3_constr/cgroups"
-	"Docker/chap3_constr/cgroups/subsystems"
-	"Docker/chap3_constr/container"
+	"Docker/src/cgroups"
+	"Docker/src/cgroups/subsystems"
+	"Docker/src/container"
 	log "github.com/sirupsen/logrus"
 	"os"
 	"strings"
