@@ -38,6 +38,7 @@ func NewParentProcess(tty bool) (*exec.Cmd, *os.File) {
 	// 传入管道文件读取端的句柄
 	// 一个进程默认会有standard IO/error三个文件描述符，因此这里是第四个，将管道的一端传递给子进程
 	cmd.ExtraFiles = []*os.File{readPipe}
+	cmd.Dir = "/root/busybox"
 	return cmd, writePipe
 }
 
@@ -47,5 +48,5 @@ func NewPipe() (*os.File, *os.File, error) {
 	if err != nil {
 		return nil, nil, err
 	}
-	return read, write, err
+	return read, write, nil
 }
