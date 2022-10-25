@@ -45,7 +45,7 @@ func (s *MemorySubsystem) Apply(cgroupPath string, pid int) error {
 		}
 		return nil
 	} else {
-		return err
+		return fmt.Errorf("get cgroup %s error: %v", cgroupPath, err)
 	}
 }
 
