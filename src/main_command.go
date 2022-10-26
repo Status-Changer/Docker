@@ -40,6 +40,10 @@ var runCommand = cli.Command{
 			Name:  "cpuset",
 			Usage: "cpuset limit",
 		},
+		cli.StringFlag{
+			Name:  "v",
+			Usage: "volume",
+		},
 	},
 	// 判断参数是否含有command；获取用户的command；调用Run准备启动容器
 	Action: func(context *cli.Context) error {
@@ -51,12 +55,13 @@ var runCommand = cli.Command{
 			cmdArray = append(cmdArray, arg)
 		}
 		tty := context.Bool("ti")
+		volume := context.String("v")
 		resConf := &subsystems.ResourceConfig{
 			MemoryLimit: context.String("m"),
 			CpuShare:    context.String("cpuset"),
 			CpuSet:      context.String("cpushare"),
 		}
-		Run(tty, cmdArray, resConf)
+		Run(tty, cmdArray, resConf, volume)
 		return nil
 	},
 }

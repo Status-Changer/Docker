@@ -10,8 +10,8 @@ import (
 )
 
 // Run clone一个隔离namespace的进程，在子进程中调用自己发送init参数，调用init方法去初始化资源
-func Run(tty bool, commandArray []string, res *subsystems.ResourceConfig) {
-	parent, writePipe := container.NewParentProcess(tty)
+func Run(tty bool, commandArray []string, res *subsystems.ResourceConfig, volume string) {
+	parent, writePipe := container.NewParentProcess(tty, volume)
 	if parent == nil {
 		log.Errorf("New parent process error")
 		return
@@ -30,7 +30,7 @@ func Run(tty bool, commandArray []string, res *subsystems.ResourceConfig) {
 	parent.Wait()
 	mountURL := "/root/mnt/"
 	rootURL := "/root/"
-	container.DeleteWorkspace(rootURL, mountURL)
+	container.DeleteWorkspace(rootURL, mountURL, volume)
 	os.Exit(0)
 }
 
