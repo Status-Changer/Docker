@@ -1,10 +1,10 @@
 package main
 
 import (
-	"Docker/src/cgroups"
-	"Docker/src/cgroups/subsystems"
-	"Docker/src/container"
-	"Docker/src/utils"
+	"Docker/cgroups"
+	"Docker/cgroups/subsystems"
+	"Docker/container"
+	utils2 "Docker/utils"
 	"encoding/json"
 	"fmt"
 	log "github.com/sirupsen/logrus"
@@ -62,7 +62,7 @@ func sendInitCommand(commandArray []string, writePipe *os.File) {
 // recordContainerInfo 记录容器的各种信息，并以json格式保存
 func recordContainerInfo(containerPID int, commandArray []string, containerName string) (
 	string, error) {
-	id := utils.RandStringBytes(utils.DefaultContainerIdLength)
+	id := utils2.RandStringBytes(utils2.DefaultContainerIdLength)
 	createdTime := time.Now().Format("2006-01-02 15:04:05")
 	command := strings.Join(commandArray, "")
 	if len(containerName) == 0 {
@@ -75,7 +75,7 @@ func recordContainerInfo(containerPID int, commandArray []string, containerName 
 		Name:        containerName,
 		Command:     command,
 		CreatedTime: createdTime,
-		Status:      utils.ContainerStatusRunning,
+		Status:      utils2.ContainerStatusRunning,
 	}
 
 	// 将容器信息序列化
@@ -87,14 +87,14 @@ func recordContainerInfo(containerPID int, commandArray []string, containerName 
 	jsonStr := string(jsonBytes)
 
 	// 容器存储的路径，如果不存在就级联创建
-	dirUrl := fmt.Sprintf(utils.DefaultContainerInfoStorageLocation, containerName)
+	dirUrl := fmt.Sprintf(utils2.DefaultContainerInfoStorageLocation, containerName)
 	if err := os.MkdirAll(dirUrl, 0622); err != nil {
 		log.Errorf("Mkdir all error %s. error %v", dirUrl, err)
 		return "", err
 	}
 
 	// 创建最终的配置文件
-	fileName := dirUrl + "/" + utils.DefaultContainerInfoConfigName
+	fileName := dirUrl + "/" + utils2.DefaultContainerInfoConfigName
 	file, err := os.Create(fileName)
 	defer file.Close()
 	if err != nil {
@@ -112,7 +112,7 @@ func recordContainerInfo(containerPID int, commandArray []string, containerName 
 }
 
 func deleteContainerInfo(containerId string) {
-	dirURL := fmt.Sprintf(utils.DefaultContainerInfoStorageLocation, containerId)
+	dirURL := fmt.Sprintf(utils2.DefaultContainerInfoStorageLocation, containerId)
 	if err := os.RemoveAll(dirURL); err != nil {
 		log.Errorf("Remove dir %s error %v", dirURL, err)
 	}
