@@ -10,6 +10,15 @@ import (
 	"syscall"
 )
 
+type ContainerInfo struct {
+	Pid         string `json:"pid"`     // 容器的init进程在宿主机上的pid
+	Id          string `json:"id"`      // 容器id
+	Name        string `json:"name"`    // 容器名称
+	Command     string `json:"command"` // 容器内init进程的运行命令
+	CreatedTime string `json:"createdTime"`
+	Status      string `json:"status"`
+}
+
 // NewParentProcess 调用当前进程（/proc/self/exe）对创建出来的进程进行初始化：
 //
 // 1. 调用initCommand去初始化进程的环境和资源.
