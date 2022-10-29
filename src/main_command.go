@@ -48,6 +48,10 @@ var runCommand = cli.Command{
 			Name:  "v",
 			Usage: "volume",
 		},
+		cli.StringFlag{
+			Name:  "name",
+			Usage: "container name",
+		},
 	},
 	// 判断参数是否含有command；获取用户的command；调用Run准备启动容器
 	Action: func(context *cli.Context) error {
@@ -73,7 +77,8 @@ var runCommand = cli.Command{
 			CpuSet:      context.String("cpushare"),
 		}
 		log.Infof("createTty=%v", createTty)
-		Run(createTty, cmdArray, resConf, volume)
+		containerName := context.String("name")
+		Run(createTty, cmdArray, resConf, volume, containerName)
 		return nil
 	},
 }
@@ -87,6 +92,15 @@ var commitCommand = cli.Command{
 		}
 		imageName := context.Args().Get(0)
 		commitContainer(imageName)
+		return nil
+	},
+}
+
+var listCommand = cli.Command{
+	Name:  "ps",
+	Usage: "list all containers",
+	Action: func(context *cli.Context) error {
+		ListAllContainers()
 		return nil
 	},
 }
