@@ -12,7 +12,7 @@
 2. If you are using a Linux machine for development, go to step 4; or
 3. Sync your code to a Linux environment first;
 4. `cd` to the code's root directory, then execute `go build -o docker` to build the project;
-5. Run the executable file like the REAL docker, have a good time enjoying this project!
+5. Run the executable file like the REAL docker, and have a good time enjoying it!
 
 ### Parameters Supporting Now:
 - `run` runs a container with the following sub-parameters:
