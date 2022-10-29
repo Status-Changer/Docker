@@ -1,8 +1,8 @@
 package main
 
 import (
-	"Docker/src/container"
-	"Docker/src/utils"
+	"Docker/container"
+	"Docker/utils"
 	"encoding/json"
 	"fmt"
 	log "github.com/sirupsen/logrus"

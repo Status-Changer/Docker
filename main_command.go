@@ -1,8 +1,8 @@
 package main
 
 import (
-	"Docker/src/cgroups/subsystems"
-	"Docker/src/container"
+	"Docker/cgroups/subsystems"
+	"Docker/container"
 	"fmt"
 	log "github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
