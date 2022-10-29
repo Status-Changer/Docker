@@ -3,7 +3,7 @@
 ## A Simple Docker Container Implementation in Golang
 
 ### Suggested running environment:
-- Operating system: Ubuntu 14.04 *(Exactly)*
+- Operating System: Ubuntu 14.04 *(Exactly)*
 - Core Version: 3.10.0-83-generic
 - Golang 1.7.1 *(at least)*
 
@@ -15,7 +15,7 @@
 5. Run the executable file like the REAL docker, have a good time enjoying this project!
 
 ### Parameters Supporting Now:
-- `run` runs a container with the following sub-parameters:
+- `run` runs a container with the following (optional) sub-parameters:
     - `-ti` running at interactive mode
     - `-m` memory space limitation
     - `-cpushare` CPU share limitation
