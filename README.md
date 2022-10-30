@@ -19,5 +19,6 @@
     - `-cpushare` CPU share limitation
     - `-cpuset` CPU set limitation
     - `-v` mounting a host directory to a container directory
+    - `-d` running in the background
 - `commit` zips a container image to a `.tar` file
 - `ps` displays all containers
