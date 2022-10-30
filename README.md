@@ -1,6 +1,4 @@
-# Docker
-
-## A Simple Docker Container Implementation in Golang
+<font size=5>**Docker**:</font> <font size=3>A Simple Container Implementation in Golang</font>
 
 ### Suggested running environment:
 - Operating System: Ubuntu 14.04 *(Exactly)*
