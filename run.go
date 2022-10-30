@@ -16,7 +16,7 @@ import (
 
 // Run clone一个隔离namespace的进程，在子进程中调用自己发送init参数，调用init方法去初始化资源
 func Run(tty bool, commandArray []string, res *subsystems.ResourceConfig, volume string, containerName string) {
-	parent, writePipe := container.NewParentProcess(tty, volume)
+	parent, writePipe := container.NewParentProcess(tty, volume, containerName)
 	if parent == nil {
 		log.Errorf("New parent process error")
 		return

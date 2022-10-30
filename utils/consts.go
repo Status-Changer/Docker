@@ -7,4 +7,5 @@ const (
 	ContainerStatusExited               string = "exited"
 	DefaultContainerInfoStorageLocation string = "/var/run/Docker/%s/"
 	DefaultContainerInfoConfigName      string = "config.json"
+	DefaultContainerLogFileName         string = "container.log"
 )

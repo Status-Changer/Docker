@@ -3,6 +3,8 @@
 package container
 
 import (
+	"Docker/utils"
+	"fmt"
 	log "github.com/sirupsen/logrus"
 	"os"
 	"os/exec"
@@ -26,7 +28,7 @@ type Info struct {
 // 2. Cloneflags用于fork一个新进程，并使用namespace隔离外部环境.
 //
 // 3. 如果用户指定-ti参数就将当前进程的IO导入到标准IO上.
-func NewParentProcess(tty bool, volume string) (*exec.Cmd, *os.File) {
+func NewParentProcess(tty bool, volume string, containerName string) (*exec.Cmd, *os.File) {
 	readPipe, writePipe, err := NewPipe()
 	if err != nil {
 		log.Errorf("New pipe error %v", err)
@@ -43,6 +45,19 @@ func NewParentProcess(tty bool, volume string) (*exec.Cmd, *os.File) {
 		cmd.Stdin = os.Stdin
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
+	} else {
+		dirURL := fmt.Sprintf(utils.DefaultContainerInfoStorageLocation, containerName)
+		if err := os.Mkdir(dirURL, 0622); err != nil {
+			log.Errorf("NewParentProcess mkdir %s error. %v", dirURL, err)
+			return nil, nil
+		}
+		stdLogFilePath := dirURL + utils.DefaultContainerLogFileName
+		stdLogFile, err := os.Create(stdLogFilePath)
+		if err != nil {
+			log.Errorf("NewParentProcess create file %s error. %v", stdLogFile, err)
+			return nil, nil
+		}
+		cmd.Stdout = stdLogFile
 	}
 
 	// 传入管道文件读取端的句柄
