@@ -69,7 +69,7 @@ func recordContainerInfo(containerPID int, commandArray []string, containerName 
 		containerName = id
 	}
 
-	containerInfo := &container.ContainerInfo{
+	containerInfo := &container.Info{
 		Pid:         strconv.Itoa(containerPID),
 		Id:          id,
 		Name:        containerName,

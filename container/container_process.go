@@ -10,7 +10,7 @@ import (
 	"syscall"
 )
 
-type ContainerInfo struct {
+type Info struct {
 	Pid         string `json:"pid"`     // 容器的init进程在宿主机上的pid
 	Id          string `json:"id"`      // 容器id
 	Name        string `json:"name"`    // 容器名称
