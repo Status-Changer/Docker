@@ -23,7 +23,7 @@ func ListAllContainers() {
 		return
 	}
 
-	var containers []*container.ContainerInfo
+	var containers []*container.Info
 	for _, file := range files {
 		tempContainer, err := getContainerInfo(file)
 		if err != nil {
@@ -47,7 +47,7 @@ func ListAllContainers() {
 	}
 }
 
-func getContainerInfo(file os.FileInfo) (*container.ContainerInfo, error) {
+func getContainerInfo(file os.FileInfo) (*container.Info, error) {
 	// 根据文件名及相关的路径配置信息，获得文件绝对路径
 	containerName := file.Name()
 	configFileDir := fmt.Sprintf(utils.DefaultContainerInfoStorageLocation, containerName)
@@ -60,7 +60,7 @@ func getContainerInfo(file os.FileInfo) (*container.ContainerInfo, error) {
 		return nil, err
 	}
 
-	var containerInfo container.ContainerInfo
+	var containerInfo container.Info
 	if err := json.Unmarshal(content, &containerInfo); err != nil {
 		log.Errorf("Json unmarshal error %v", err)
 		return nil, err
