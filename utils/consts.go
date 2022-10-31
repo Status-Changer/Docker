@@ -7,4 +7,6 @@ const (
 	ContainerStatusExited               string = "exited"
 	DefaultContainerInfoStorageLocation string = "/var/run/Docker/%s/"
 	DefaultContainerInfoConfigName      string = "config.json"
+	EnvironmentExecPid                  string = "docker_pid"
+	EnvironmentExecCommand              string = "docker_cmd"
 )

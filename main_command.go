@@ -3,9 +3,11 @@ package main
 import (
 	"Docker/cgroups/subsystems"
 	"Docker/container"
+	"Docker/utils"
 	"fmt"
 	log "github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
+	"os"
 )
 
 var initCommand = cli.Command{
@@ -101,6 +103,31 @@ var listCommand = cli.Command{
 	Usage: "list all containers",
 	Action: func(context *cli.Context) error {
 		ListAllContainers()
+		return nil
+	},
+}
+
+var execCommand = cli.Command{
+	Name:  "exec",
+	Usage: "execute a command into container",
+	Action: func(context *cli.Context) error {
+		// for callback 如果已经指定了环境变量，说明C代码已经运行过了，直接返回就行
+		if os.Getenv(utils.EnvironmentExecPid) != "" {
+			log.Infof("pid callback pid %d", os.Getpid())
+			return nil
+		}
+
+		// 期望的调用方式是./docker exec 容器名 command
+		if len(context.Args()) < 2 {
+			return fmt.Errorf("missing container name or command")
+		}
+
+		containerName := context.Args().Get(0)
+		var commandArray []string
+		for _, arg := range context.Args().Tail() {
+			commandArray = append(commandArray, arg)
+		}
+		ExecContainer(containerName, commandArray)
 		return nil
 	},
 }
