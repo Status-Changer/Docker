@@ -20,6 +20,7 @@ func main() {
 		runCommand,
 		commitCommand,
 		listCommand,
+		execCommand,
 		logCommand,
 	}
 
