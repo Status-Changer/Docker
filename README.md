@@ -22,3 +22,4 @@
     - `-d` running in the background
 - `commit` zips a container image to a `.tar` file
 - `ps` displays all containers
+- `logs` displays log file of a certain container
