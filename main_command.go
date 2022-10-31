@@ -128,8 +128,10 @@ var execCommand = cli.Command{
 			commandArray = append(commandArray, arg)
 		}
 		ExecContainer(containerName, commandArray)
-    return nil
-},
+		return nil
+	},
+}
+
 var logCommand = cli.Command{
 	Name:  "logs",
 	Usage: "print logs of a container",
@@ -139,6 +141,6 @@ var logCommand = cli.Command{
 		}
 		containerName := context.Args().Get(0)
 		logContainer(containerName)
-    return nil;
-  },
+		return nil
+	},
 }
